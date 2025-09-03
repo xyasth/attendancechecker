@@ -49,10 +49,11 @@ export default async function DashboardPage() {
       </div>
     );
   } else if (role === "admin") {
-    const employees = await prisma.user.findMany({
-      where: { role: "employee" },
-      select: { id: true, name: true, email: true },
-    });
+    const employees: { id: string; name: string; email: string }[] =
+      await prisma.user.findMany({
+        where: { role: "employee" },
+        select: { id: true, name: true, email: true },
+      });
 
     content = (
       <div className="max-w-2xl mx-auto mt-8 bg-white p-6 rounded-2xl shadow">
