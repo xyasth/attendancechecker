@@ -1,6 +1,6 @@
 // src/app/api/admin/attendance/route.ts
 import { NextResponse } from "next/server";
-import {prisma} from "@/lib/prisma";
+import { prisma } from "@/lib/prisma";
 
 export async function GET() {
   try {
@@ -16,7 +16,13 @@ export async function GET() {
       },
     });
 
-    const result = employees.map((emp) => ({
+    // Explicitly type the employee
+    const result = employees.map((emp: {
+      id: string;
+      name: string;
+      email: string;
+      absensi: { id: string; date: Date; status: string; userId: string }[];
+    }) => ({
       id: emp.id,
       name: emp.name,
       email: emp.email,
@@ -26,6 +32,9 @@ export async function GET() {
     return NextResponse.json(result);
   } catch (err) {
     console.error(err);
-    return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Internal Server Error" },
+      { status: 500 }
+    );
   }
 }
