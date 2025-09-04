@@ -6,14 +6,14 @@ import type Human from "@vladmandic/human";
 export default function FaceCapture({ onComplete }: { onComplete: (embedding: number[]) => void }) {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [human, setHuman] = useState<Human | null>(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false); 
   const [captured, setCaptured] = useState(false);
 
   useEffect(() => {
     let h: Human;
 
     async function load() {
-      const HumanLib = (await import("@vladmandic/human/dist/human.esm.js")).default;
+      const HumanLib = (await import("@vladmandic/human")).default;
       h = new HumanLib({
         modelBasePath: "https://vladmandic.github.io/human/models",
         backend: "cpu",
@@ -31,7 +31,7 @@ export default function FaceCapture({ onComplete }: { onComplete: (embedding: nu
     }
     initCamera();
 
-    const videoEl = videoRef.current;
+    const videoEl = videoRef.current;   
 
     return () => {
       if (videoEl?.srcObject) {
