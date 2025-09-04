@@ -27,7 +27,7 @@ export default function FaceCapture({
       setHuman(h);
     }
 
-    load();
+    load();  
 
     async function initCamera() {
       const stream = await navigator.mediaDevices.getUserMedia({ video: true });
@@ -35,7 +35,6 @@ export default function FaceCapture({
     }
     initCamera();
 
-    // ✅ snapshot ref for cleanup
     const videoEl = videoRef.current;
 
     return () => {
@@ -50,7 +49,6 @@ export default function FaceCapture({
   async function takeCapture() {
     if (!human || !videoRef.current) return;
 
-    // Pause video so the frame "freezes"
     videoRef.current.pause();
     setLoading(true);
 
