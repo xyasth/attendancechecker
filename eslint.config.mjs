@@ -11,11 +11,21 @@ const compat = new FlatCompat({
 
 const eslintConfig = [
   ...compat.extends("next/core-web-vitals", "next/typescript"),
+
+  {
+    files: ["electron.js"], 
+    rules: {
+      "@typescript-eslint/no-require-imports": "off",
+      "@typescript-eslint/no-var-requires": "off"
+    }
+  },
+
   {
     ignores: [
       "node_modules/**",
       ".next/**",
-      "out/**",
+      "out/**",     
+      "dist/**",     
       "build/**",
       "next-env.d.ts",
     ],
