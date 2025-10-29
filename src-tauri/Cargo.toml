@@ -1,0 +1,47 @@
+[package]
+name = "app"
+version = "0.1.0"
+description = "A Tauri App"
+authors = ["you"]
+license = ""
+repository = ""
+edition = "2021"
+rust-version = "1.77.2"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[lib]
+name = "app_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2.5.1", features = [] }
+
+[dependencies]
+serde_json = "1.0"
+serde = { version = "1.0", features = ["derive"] }
+log = "0.4"
+tauri = { version = "2.9.1", features = [] }
+tauri-plugin-log = "2.0.0-rc.3"
+# For Async Runtime
+tokio = { version = "1", features = ["full"] }
+
+# For Postgres (Neon) via SQLx
+sqlx = { version = "0.7", features = ["runtime-tokio-native-tls", "postgres", "chrono", "uuid"] }
+# Use "runtime-tokio-rustls" instead of "runtime-tokio-native-tls" if you prefer rustls
+
+# For HTTP requests (ChromaDB API)
+reqwest = { version = "0.11", features = ["json"] } # Or latest 0.12+
+
+# For Date/Time handling
+chrono = { version = "0.4", features = ["serde"] }
+
+# For reading .env file
+dotenvy = "0.15"
+
+# If you need UUID generation in Rust (Prisma's cuid/uuid are usually strings)
+# uuid = { version = "1", features = ["v4", "serde"] }
+
+[features]
+# If using Tauri v1
+custom-protocol = ["tauri/custom-protocol"]
