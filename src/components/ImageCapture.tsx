@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import type Human from "@vladmandic/human";
+import { Human } from '@vladmandic/human';
 import Image from "next/image";
 
 export default function ImageFaceCapture({
@@ -20,7 +20,7 @@ export default function ImageFaceCapture({
       const HumanLib = (await import("@vladmandic/human")).default;
       h = new HumanLib({
         modelBasePath: "https://vladmandic.github.io/human/models",
-        backend: "cpu",
+        backend: "webgl",
       });
       await h.load();
       await h.warmup();

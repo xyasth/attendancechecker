@@ -1,6 +1,14 @@
 export {};
 
-// Define types for the data we pass back and forth
+// --- Module Declarations for 100% CSR ---
+// This tells TypeScript how to handle the explicit browser-side import 
+// needed to avoid the @tensorflow/tfjs-node error during build.
+declare module '@vladmandic/human/dist/human.esm.js' {
+  import { Human } from '@vladmandic/human';
+  export { Human };
+}
+
+// --- Your Existing Electron Types ---
 interface User {
   id: string;
   name: string;

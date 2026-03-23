@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import type Human from "@vladmandic/human";
+import { Human } from '@vladmandic/human';
 
 export default function FaceCapture({ onComplete }: { onComplete: (embedding: number[]) => void }) {
   const videoRef = useRef<HTMLVideoElement | null>(null);
@@ -16,7 +16,7 @@ export default function FaceCapture({ onComplete }: { onComplete: (embedding: nu
       const HumanLib = (await import("@vladmandic/human")).default;
       h = new HumanLib({
         modelBasePath: "https://vladmandic.github.io/human/models",
-        backend: "cpu",
+        backend: "webgl",
       });
       await h.load();
       await h.warmup();
